@@ -63,7 +63,7 @@ def main():
     browser.get(book_page)
     create_Word_Set(len(words))
     while len(sorted_words) != 0:
-        for i in range(int(len(words)/200 + 1)-1):
+        for i in range(int(len(words)/200 + 1)):
             browser.get(book_page)
             browser.find_element_by_link_text("Unit " + i.__str__()).click()
             browser.get(browser.current_url)
@@ -75,7 +75,8 @@ def main():
                             sorted_words.remove(sorted_words[j])
                             break
                         add_words(sorted_words[j].pop(0))
-                        inputed += 1
+                        inputed = int(browser.find_element_by_id("wordlist-num-vocab").text)
+                        #inputed += 1
                         k += 1
                     if j >= len(sorted_words)-1 or inputed >= 200:
                         break
